@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Summary Report
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Summary Report</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-label position="floating">Starting Date:</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="StartDate"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Ending Date:</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="EndDate"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-button (click)="CalculateTotal()">
+      Calculate Total
+    </ion-button>
+  </ion-item>
+    
+  <!-- <ion-item>
+    <ion-label position="floating">Total:</ion-label> 
+    <ion-input [(ngModel)]="Total" readonly="true"></ion-input>
+  </ion-item> -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-title>Date</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-title>Store</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-title>Amount</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-row
+      *ngFor="let receipt of receipts; index as position">
+       <ion-col>
+          {{ receipt.date.toLocaleDateString('en-US') }}
+       </ion-col>
+       <ion-col>
+          {{ receipt.store }}
+       </ion-col>
+        <ion-col>
+          {{ receipt.amount }}
+        </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col> </ion-col>
+      <ion-col>
+        <ion-title>Total:</ion-title></ion-col>
+      <ion-col>
+        <ion-title>{{Total}}</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+

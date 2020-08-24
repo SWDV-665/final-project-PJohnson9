@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Add New Receipt
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add New Receipt</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-label position="floating">Receipt Date:</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="Date"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Amount</ion-label>
+    <ion-input [(ngModel)]="Amount" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Store</ion-label>
+    <ion-input [(ngModel)]="Store"></ion-input>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+    <ion-col size="6" 
+      *ngFor="let receipt of receipts; index as position">
+        <ion-img src="{{ receipt.base64 ? receipt.base64 : receipt.webviewPath }}"></ion-img>
+        <ion-title>{{ receipt.filename }}</ion-title>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item>
+    <ion-button (click)="saveReceipt()">
+      Save Receipt
+    </ion-button>
+  </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

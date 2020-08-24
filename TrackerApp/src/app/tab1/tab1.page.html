@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Review Receipts
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Review Receipts</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  
+  <ion-item
+    *ngFor="let image of Image; index as position">
+    <ion-img src="{{ image }}"></ion-img>
+    <!-- <ion-img src="{{ Image }}"></ion-img> -->
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-title>Date</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-title>Store</ion-title>
+      </ion-col>
+      <ion-col>
+        <ion-title>Amount</ion-title>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row
+      *ngFor="let receipt of receipts; index as position">
+      <ion-col>
+        {{ receipt.date.toLocaleDateString('en-US') }}
+     </ion-col>
+     <ion-col>
+        {{ receipt.store }}
+     </ion-col>
+      <ion-col>
+        {{ receipt.amount }}
+      </ion-col>
+        <ion-col>
+          <ion-button (click)="showImages(receipt.image)">
+            View
+          </ion-button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item>
+    <ion-button (click)="readReceipts()">
+      Refresh
+    </ion-button>
+  </ion-item>
+
+
+</ion-content>
