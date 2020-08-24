@@ -29,7 +29,7 @@ export class PhotoService {
       filepath: "soon...",
       filename: "Receipt Image",
       webviewPath: capturedPhoto.webPath,
-      base64: await this.readAsBase64(capturedPhoto)
+      base64: savedImageFile.base64
     });
   }
 
@@ -49,7 +49,8 @@ export class PhotoService {
     // already loaded into memory
     return {
       filepath: fileName,
-      webviewPath: cameraPhoto.webPath
+      webviewPath: cameraPhoto.webPath,
+      base64: base64Data
     };
   }
 
