@@ -1,0 +1,8 @@
+{
+  "name": "TrackerApp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
