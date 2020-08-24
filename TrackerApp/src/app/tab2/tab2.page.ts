@@ -45,7 +45,8 @@ export class Tab2Page {
     this.Date = this.Today;
     this.Amount = "";
     this.Store = "";
-    this.receipts = [];
+    this.photoService.receipts = [];
+    this.receipts = this.photoService.receipts;
   }
 }
 

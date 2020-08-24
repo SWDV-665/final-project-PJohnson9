@@ -8,6 +8,7 @@ const { Camera, Filesystem, Storage } = Plugins;
 @Injectable({
   providedIn: 'root'
 })
+
 export class PhotoService {
 
   constructor() { }
@@ -23,32 +24,22 @@ export class PhotoService {
       quality: 100 
     });
 
-    // Adds new receipt
-    const savedImageFile = await this.saveReceipt(capturedPhoto);
-    this.receipts.unshift({
-      filepath: "soon...",
-      filename: "Receipt Image",
+    // Displays new image on page
+    const savedImageFile = await this.saveReceiptImage(capturedPhoto);
+    this.receipts.push({
       webviewPath: capturedPhoto.webPath,
+      //base64: await this.readAsBase64(capturedPhoto)
       base64: savedImageFile.base64
     });
   }
 
-  private async saveReceipt(cameraPhoto: CameraPhoto){ 
-      // Convert photo to base64 format, required by Filesystem API to save
+  private async saveReceiptImage(cameraPhoto: CameraPhoto){ 
+      // Convert photo to base64 format
     const base64Data = await this.readAsBase64(cameraPhoto);
-
-    // Write the file to the data directory
-    const fileName = new Date().getTime() + '.jpeg';
-    const savedFile = await Filesystem.writeFile({
-      path: fileName,
-      data: base64Data,
-      directory: FilesystemDirectory.Data
-    });
 
     // Use webPath to display the new image instead of base64 since it's
     // already loaded into memory
     return {
-      filepath: fileName,
       webviewPath: cameraPhoto.webPath,
       base64: base64Data
     };
@@ -70,14 +61,10 @@ export class PhotoService {
     };
     reader.readAsDataURL(blob);
   });
-
-  
 }
 
 // Track Receipt image and metadata
 interface ReceiptImage {
-  filepath: string;
-  filename: string;
   webviewPath: string;
   base64?: string;
 }
